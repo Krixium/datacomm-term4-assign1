@@ -67,7 +67,7 @@ void assign1::hostnameReceived(const QString hostname)
 {
 	const char * ipAddress = winsockManager->LookupIpByHostname(hostname.toStdString().c_str());
 
-	if (ipAddress == "")
+	if (ipAddress[0] == '\0')
 	{
 		displayTextOnLabel("Error: IP Address could not be found.");
 	}
@@ -82,7 +82,7 @@ void assign1::ipReceived(const QString ipAddress)
 {
 	const char * hostname = winsockManager->LookupHostnameByIp(ipAddress.toStdString().c_str());
 
-	if (hostname == "")
+	if (hostname[0] == '\0')
 	{
 		displayTextOnLabel("Error: Hostname could not be found.");
 	}

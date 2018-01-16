@@ -1,5 +1,7 @@
 #include "assign1.h"
 
+#include <QDebug>
+
 assign1::assign1(QWidget *parent)
 	: QMainWindow(parent)
 {
@@ -9,6 +11,7 @@ assign1::assign1(QWidget *parent)
 	hostnameLookupDialog = new HostnameLookupDialog(this);
 	serviceLookupDialog = new ServiceLookupDialog(this);
 	portLookupDialog = new PortLookupDialog(this);
+	winsockManager = new WinsockManager();
 
 	initConnections();
 }
@@ -16,6 +19,10 @@ assign1::assign1(QWidget *parent)
 assign1::~assign1()
 {
 	delete ipLookupDialog;
+	delete hostnameLookupDialog;
+	delete serviceLookupDialog;
+	delete portLookupDialog;
+	delete winsockManager;
 }
 
 void assign1::initConnections()
@@ -58,20 +65,60 @@ void assign1::lookupPortPressed()
 
 void assign1::hostnameReceived(const QString hostname)
 {
-	displayTextOnLabel(hostname);
+	const char * ipAddress = winsockManager->LookupIpByHostname(hostname.toStdString().c_str());
+
+	if (ipAddress == "")
+	{
+		displayTextOnLabel("Error: IP Address could not be found.");
+	}
+	else
+	{
+		QString message = "The IP address of " + hostname + " is " + ipAddress;
+		displayTextOnLabel(message);
+	}
 }
 
 void assign1::ipReceived(const QString ipAddress)
 {
-	displayTextOnLabel(ipAddress);
+	const char * hostname = winsockManager->LookupHostnameByIp(ipAddress.toStdString().c_str());
+
+	if (hostname == "")
+	{
+		displayTextOnLabel("Error: Hostname could not be found.");
+	}
+	else
+	{
+		QString message = "The hostname for " + ipAddress + " is " + hostname + ".";
+		displayTextOnLabel(message);
+	}
 }
 
 void assign1::portReceived(const QString port, const QString protocol)
 {
-	displayTextOnLabel(port + " " + protocol);
+	const char * service = winsockManager->LookupServiceByPort(port.toInt(), protocol.toUpper().toStdString().c_str());
+
+	if (service[0] == '\0')
+	{
+		displayTextOnLabel("Error: Service cound not be found.");
+	}
+	else
+	{
+		QString message = "Port " + port + "/" + protocol.toUpper() + " is used for " + QString(service).toUpper() + ".";
+		displayTextOnLabel(message);
+	}
 }
 
 void assign1::serviceReceived(const QString service, const QString protocol)
 {
-	displayTextOnLabel(service + " " + protocol);
+	const short port = winsockManager->LookupPortByService(service.toUpper().toStdString().c_str(), protocol.toUpper().toStdString().c_str());
+
+	if (port == -1)
+	{
+		displayTextOnLabel("Error: Port could not be found.");
+	}
+	else
+	{
+		QString message = service.toUpper() + " using " + protocol.toUpper() + " uses port " + QString::number(port) + ".";
+		displayTextOnLabel(message);
+	}
 }

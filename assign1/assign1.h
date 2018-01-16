@@ -3,10 +3,11 @@
 #include <QtWidgets/QMainWindow>
 #include "ui_assign1.h"
 
-#include "IpLookupDialog.h"
 #include "HostnameLookupDialog.h"
-#include "ServiceLookupDialog.h"
+#include "IpLookupDialog.h"
 #include "PortLookupDialog.h"
+#include "ServiceLookupDialog.h"
+#include "WinsockManager.h"
 
 class assign1 : public QMainWindow
 {
@@ -22,8 +23,7 @@ private:
 	HostnameLookupDialog* hostnameLookupDialog;
 	ServiceLookupDialog* serviceLookupDialog;
 	PortLookupDialog* portLookupDialog;
-
-	// Create an object that handles winsock
+	WinsockManager* winsockManager;
 
 	void initConnections();
 	void displayTextOnLabel(const QString text);

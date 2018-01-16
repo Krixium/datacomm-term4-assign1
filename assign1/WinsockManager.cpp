@@ -11,9 +11,9 @@ WinsockManager::~WinsockManager()
 	WSACleanup();
 }
 
-const char * WinsockManager::LookupIpByHostname(const char * hostname)
+const string WinsockManager::LookupIpByHostname(const char * hostname)
 {
-	struct	hostent *hp;
+	struct hostent *hp;
 
 	if ((hp = gethostbyname(hostname)) == NULL)
 	{
@@ -27,13 +27,14 @@ const char * WinsockManager::LookupIpByHostname(const char * hostname)
 	}
 }
 
-const char * WinsockManager::LookupHostnameByIp(const char * ipAddress)
+const string WinsockManager::LookupHostNameByIp(const char * ipAddress)
 {
 	int		a;
 	struct	hostent *hp;
 	struct	in_addr my_addr, *addr_p;
 	char	**p;
 	char	ip_address[256];
+	string ss;
 
 	addr_p = (struct in_addr*)malloc(sizeof(struct in_addr));
 	addr_p = &my_addr;
@@ -46,7 +47,6 @@ const char * WinsockManager::LookupHostnameByIp(const char * ipAddress)
 	strcpy(ip_address, ipAddress);
 	addr_p->s_addr = inet_addr(ip_address);
 
-
 	hp = gethostbyaddr((char *)addr_p, PF_INET, sizeof(my_addr));
 
 	if (hp == NULL)
@@ -55,11 +55,26 @@ const char * WinsockManager::LookupHostnameByIp(const char * ipAddress)
 	}
 	else
 	{
-		return hp->h_name;
+		for (p = hp->h_addr_list; *p != 0; p++)
+		{
+			struct in_addr in;
+			char **q;
+
+			memcpy(&in.s_addr, *p, sizeof (in.s_addr));
+			ss += string("Host Name: ") + string(hp->h_name);
+			ss += string("\nAliases:\n");
+
+			for (q = hp->h_aliases; *q != 0; q++)
+			{
+				ss += string("\t") + string(*q) + string("\n");
+			}
+		}
+
+		return ss;
 	}
 }
 
-const char * WinsockManager::LookupServiceByPort(const int port, const char * protocol)
+const string WinsockManager::LookupServiceByPort(const int port, const char * protocol)
 {
 	struct servent * sv;
 

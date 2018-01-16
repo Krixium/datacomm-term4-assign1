@@ -1,5 +1,6 @@
 #include "assign1.h"
 
+#include <string>
 #include <QDebug>
 
 assign1::assign1(QWidget *parent)
@@ -40,7 +41,7 @@ void assign1::initConnections()
 
 void assign1::displayTextOnLabel(const QString text)
 {
-	ui.label_result->setText(text);
+	ui.plainTextEdit->appendPlainText(text);
 }
 
 void assign1::lookupIpPressed()
@@ -65,7 +66,7 @@ void assign1::lookupPortPressed()
 
 void assign1::hostnameReceived(const QString hostname)
 {
-	const char * ipAddress = winsockManager->LookupIpByHostname(hostname.toStdString().c_str());
+	const string ipAddress = winsockManager->LookupIpByHostname(hostname.toStdString().c_str());
 
 	if (ipAddress[0] == '\0')
 	{
@@ -73,29 +74,29 @@ void assign1::hostnameReceived(const QString hostname)
 	}
 	else
 	{
-		QString message = "The IP address of " + hostname + " is " + ipAddress;
+		QString message = "The IP address of " + hostname + " is " + QString::fromStdString(ipAddress);
 		displayTextOnLabel(message);
 	}
 }
 
 void assign1::ipReceived(const QString ipAddress)
 {
-	const char * hostname = winsockManager->LookupHostnameByIp(ipAddress.toStdString().c_str());
+	const string hostname = winsockManager->LookupHostNameByIp(ipAddress.toStdString().c_str());
 
 	if (hostname[0] == '\0')
 	{
-		displayTextOnLabel("Error: Hostname could not be found.");
+		displayTextOnLabel("Error: Host Name could not be found.");
 	}
 	else
 	{
-		QString message = "The hostname for " + ipAddress + " is " + hostname + ".";
+		QString message = "The host names for " + ipAddress + " is\n" + QString::fromStdString(hostname);
 		displayTextOnLabel(message);
 	}
 }
 
 void assign1::portReceived(const QString port, const QString protocol)
 {
-	const char * service = winsockManager->LookupServiceByPort(port.toInt(), protocol.toUpper().toStdString().c_str());
+	const string service = winsockManager->LookupServiceByPort(port.toInt(), protocol.toUpper().toStdString().c_str());
 
 	if (service[0] == '\0')
 	{
@@ -103,7 +104,7 @@ void assign1::portReceived(const QString port, const QString protocol)
 	}
 	else
 	{
-		QString message = "Port " + port + "/" + protocol.toUpper() + " is used for " + QString(service).toUpper() + ".";
+		QString message = "Port " + port + "/" + protocol.toUpper() + " is used for " + QString::fromStdString(service).toUpper();
 		displayTextOnLabel(message);
 	}
 }
@@ -118,7 +119,7 @@ void assign1::serviceReceived(const QString service, const QString protocol)
 	}
 	else
 	{
-		QString message = service.toUpper() + " using " + protocol.toUpper() + " uses port " + QString::number(port) + ".";
+		QString message = service.toUpper() + " using " + protocol.toUpper() + " uses port " + QString::number(port);
 		displayTextOnLabel(message);
 	}
 }

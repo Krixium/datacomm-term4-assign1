@@ -9,6 +9,8 @@
 #include "ServiceLookupDialog.h"
 #include "WinsockManager.h"
 
+using namespace std;
+
 class assign1 : public QMainWindow
 {
 	Q_OBJECT

@@ -23,9 +23,9 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>Lookup Hostname</string>
+   <string>Lookup Host Name</string>
   </property>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>10</x>

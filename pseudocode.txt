@@ -1,0 +1,63 @@
+init
+    create ip lookup button
+    create hostname lookup button
+    create service lookup button
+    create port lookup button
+
+host name lookup
+    allocate required winsock variables on stack
+    get ip address from user
+    connect to winsock
+    lookup ip address with winsock
+    close winsock
+    if error
+        return blank
+    else
+        return formatted host name
+        
+ip lookup
+    allocate required winsock variables on stack
+    get host name from user
+    connect to winsock
+    lookup host name with winsock
+    close winsock
+    if error
+        return blank
+    else
+        return formatted ip address 
+        
+service lookup
+    allocate required winsock variables on stack
+    get port from user
+    get protocol from user
+    connect to winsock
+    lookup service with winsock
+    close winsock
+    if error
+        return blank
+    else
+        return service name 
+        
+port lookup
+    allocate required winsock variables on stack
+    get service name from user
+    get protocol from user
+    connect to winsock
+    lookup port with winsock
+    close winsock
+    if error
+        return blank
+    else
+        return port number
+
+main
+    if ip lookup button is pressed
+        ip lookup
+    if host name lookup button is pressed
+        host name lookup
+    if service lookup button is pressed
+        service lookup
+    if port lookup button is pressed
+        port lookup
+    if exit
+        close program

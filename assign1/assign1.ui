@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>471</width>
+    <width>506</width>
     <height>78</height>
    </rect>
   </property>
@@ -29,12 +29,12 @@
      <verstretch>0</verstretch>
     </sizepolicy>
    </property>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>449</width>
+      <width>485</width>
       <height>56</height>
      </rect>
     </property>
@@ -50,7 +50,7 @@
           </font>
          </property>
          <property name="text">
-          <string>Lookup IP</string>
+          <string>Look For IP</string>
          </property>
         </widget>
        </item>
@@ -63,7 +63,7 @@
           </font>
          </property>
          <property name="text">
-          <string>Lookup Hostname</string>
+          <string>Look For Hostname</string>
          </property>
         </widget>
        </item>
@@ -76,7 +76,7 @@
           </font>
          </property>
          <property name="text">
-          <string>Service Lookup</string>
+          <string>Look For Service</string>
          </property>
         </widget>
        </item>
@@ -89,7 +89,7 @@
           </font>
          </property>
          <property name="text">
-          <string>Port Lookup</string>
+          <string>Look For Port</string>
          </property>
         </widget>
        </item>

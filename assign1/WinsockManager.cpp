@@ -30,6 +30,8 @@
 ----------------------------------------------------------------------------------------------------------------------*/
 #include "WinsockManager.h"
 
+#include <QDebug>
+
 /*------------------------------------------------------------------------------------------------------------------
 -- FUNCTION:	WinsockManager
 --
@@ -94,17 +96,25 @@ WinsockManager::~WinsockManager()
 const string WinsockManager::LookupIpByHostName(const char * hostname)
 {
 	struct hostent *hp;
+	char ** p;
+	string s("");
 
-	if ((hp = gethostbyname(hostname)) == NULL)
+	if ((hp = gethostbyname(hostname)) != NULL)
 	{
-		return "";
+		s += "\n";
+		for (p = hp->h_addr_list; *p != 0; p++)
+		{
+			struct in_addr in;
+			char **q;
+
+			memcpy(&in.s_addr, *p, sizeof (in.s_addr));
+
+			//printf("IP Address: %s\t Host Name: %s\n", inet_ntoa(in), hp->h_name);
+			s += "\t" + string(inet_ntoa(in)) + "\n";
+		}
 	}
-	else
-	{
-		struct in_addr in;
-		memcpy(&in.s_addr, hp->h_addr_list, sizeof(in.s_addr));
-		return inet_ntoa(in);
-	}
+
+	return s;
 }
 
 /*------------------------------------------------------------------------------------------------------------------
@@ -127,12 +137,12 @@ const string WinsockManager::LookupIpByHostName(const char * hostname)
 ----------------------------------------------------------------------------------------------------------------------*/
 const string WinsockManager::LookupHostNameByIp(const char * ipAddress)
 {
-	int		a;
-	struct	hostent *hp;
-	struct	in_addr my_addr, *addr_p;
-	char	**p;
-	char	ip_address[256];
-	string ss;
+	int	a;
+	struct hostent *hp;
+	struct in_addr my_addr, *addr_p;
+	char **p;
+	char ip_address[256];
+	string s;
 
 	addr_p = (struct in_addr*)malloc(sizeof(struct in_addr));
 	addr_p = &my_addr;
@@ -159,16 +169,16 @@ const string WinsockManager::LookupHostNameByIp(const char * ipAddress)
 			char **q;
 
 			memcpy(&in.s_addr, *p, sizeof (in.s_addr));
-			ss += string("Host Name: ") + string(hp->h_name);
-			ss += string("\nAliases:\n");
+			s += string("Host Name:\n\t") + string(hp->h_name);
+			s += string("\nAliases:\n");
 
 			for (q = hp->h_aliases; *q != 0; q++)
 			{
-				ss += string("\t") + string(*q) + string("\n");
+				s += string("\t") + string(*q) + string("\n");
 			}
 		}
 
-		return ss;
+		return s;
 	}
 }
 

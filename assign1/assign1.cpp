@@ -1,7 +1,6 @@
 #include "assign1.h"
 
 #include <string>
-#include <QDebug>
 
 assign1::assign1(QWidget *parent)
 	: QMainWindow(parent)
@@ -9,7 +8,7 @@ assign1::assign1(QWidget *parent)
 	ui.setupUi(this);
 
 	ipLookupDialog = new IpLookupDialog(this);
-	hostnameLookupDialog = new HostnameLookupDialog(this);
+	hostnameLookupDialog = new HostNameLookupDialog(this);
 	serviceLookupDialog = new ServiceLookupDialog(this);
 	portLookupDialog = new PortLookupDialog(this);
 	winsockManager = new WinsockManager();
@@ -34,7 +33,7 @@ void assign1::initConnections()
 	connect(ui.pushButton_port_lookup, &QPushButton::pressed, this, &assign1::lookupPortPressed);
 
 	connect(ipLookupDialog, &IpLookupDialog::signalHostnameEntered, this, &assign1::hostnameReceived);
-	connect(hostnameLookupDialog, &HostnameLookupDialog::signalIpAddressEntered, this, &assign1::ipReceived);
+	connect(hostnameLookupDialog, &HostNameLookupDialog::signalIpAddressEntered, this, &assign1::ipReceived);
 	connect(serviceLookupDialog, &ServiceLookupDialog::signalPortInfoEntered, this, &assign1::portReceived);
 	connect(portLookupDialog, &PortLookupDialog::signalServiceInfoEntered, this, &assign1::serviceReceived);
 }
@@ -66,7 +65,7 @@ void assign1::lookupPortPressed()
 
 void assign1::hostnameReceived(const QString hostname)
 {
-	const string ipAddress = winsockManager->LookupIpByHostname(hostname.toStdString().c_str());
+	const string ipAddress = winsockManager->LookupIpByHostName(hostname.toStdString().c_str());
 
 	if (ipAddress[0] == '\0')
 	{
@@ -74,7 +73,7 @@ void assign1::hostnameReceived(const QString hostname)
 	}
 	else
 	{
-		QString message = "The IP address of " + hostname + " is " + QString::fromStdString(ipAddress);
+		QString message = "The IP address of " + hostname + " are " + QString::fromStdString(ipAddress);
 		displayTextOnLabel(message);
 	}
 }
@@ -89,7 +88,7 @@ void assign1::ipReceived(const QString ipAddress)
 	}
 	else
 	{
-		QString message = "The host names for " + ipAddress + " is\n" + QString::fromStdString(hostname);
+		QString message = "The host names for " + ipAddress + " are\n" + QString::fromStdString(hostname);
 		displayTextOnLabel(message);
 	}
 }

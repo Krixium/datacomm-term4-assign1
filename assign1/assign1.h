@@ -22,7 +22,7 @@ public:
 private:
 	Ui::assign1Class ui;
 	IpLookupDialog* ipLookupDialog;
-	HostnameLookupDialog* hostnameLookupDialog;
+	HostNameLookupDialog* hostnameLookupDialog;
 	ServiceLookupDialog* serviceLookupDialog;
 	PortLookupDialog* portLookupDialog;
 	WinsockManager* winsockManager;

@@ -3,15 +3,15 @@
 #include <QtWidgets/QDialog>
 #include "ui_HostnameLookupDialog.h"
 
-class HostnameLookupDialog : public QDialog
+class HostNameLookupDialog : public QDialog
 {
 	Q_OBJECT
 
 public:
-	HostnameLookupDialog(QWidget *parent = Q_NULLPTR);
+	HostNameLookupDialog(QWidget *parent = Q_NULLPTR);
 
 private:
-	Ui::Dialog_Hostname ui;
+	Ui::Dialog_HostName ui;
 
 private slots:
 	void okayButtonPressed();

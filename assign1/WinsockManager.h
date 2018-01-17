@@ -13,7 +13,7 @@ public:
 	WinsockManager();
 	~WinsockManager();
 
-	const string LookupIpByHostname(const char * hostname);
+	const string LookupIpByHostName(const char * hostname);
 	const string LookupHostNameByIp(const char * ipAddress);
 	const string LookupServiceByPort(const int port, const char * protocol);
 	const short LookupPortByService(const char * service, const char * protocol);

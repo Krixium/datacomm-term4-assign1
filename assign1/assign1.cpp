@@ -1,21 +1,21 @@
 /*------------------------------------------------------------------------------------------------------------------
 -- SOURCE FILE: assign1.cpp - An application that performs network lookups.
 --
--- PROGRAM: assign1 
+-- PROGRAM:		assign1 
 --
 -- FUNCTIONS:
--- assign1(void)
--- ~assign1(void)
--- void initConnections(void)
--- void displayText(const QString text)
--- void lookupIpPressed(void)
--- void lookupHostNamePressed(void)
--- void lookupServicePressed(void)
--- void lookupPortPressed(void)
--- void hostNameReceived(const QString hostname)
--- void ipReceived(const QString ipAddress)
--- void portReceived(const QString port, const QString protocol)
--- void serviceReceived(const QString service, const QString protocol)
+--				assign1(void)
+--				~assign1(void)
+--				void initConnections(void)
+--				void displayText(const QString text)
+--				void lookupIpPressed(void)
+--				void lookupHostNamePressed(void)
+--				void lookupServicePressed(void)
+--				void lookupPortPressed(void)
+--				void hostNameReceived(const QString hostname)
+--				void ipReceived(const QString ipAddress)
+--				void portReceived(const QString port, const QString protocol)
+--				void serviceReceived(const QString service, const QString protocol)
 --
 -- DATE:		January 16, 2018
 --

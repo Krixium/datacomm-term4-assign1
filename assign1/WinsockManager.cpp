@@ -1,15 +1,15 @@
 /*------------------------------------------------------------------------------------------------------------------
 -- SOURCE FILE: WinsockManager.cpp - An application that performs network lookups.
 --
--- PROGRAM: assign1 
+-- PROGRAM:		assign1 
 --
 -- FUNCTIONS:
--- WinsockManager(void)
--- ~WinsockManager(void)
--- const std::string LookupHostNameByIp(const char * ipAddress)
--- const std::string LookupIpByHostName(const char * hostname)
--- const std::string LookupServiceByPort(const int port, const char * protocol)
--- const string WinsockManager::LookupServiceByPort(const int port, const char * protocol)
+--				WinsockManager(void)
+--				~WinsockManager(void)
+--				const std::string LookupHostNameByIp(const char * ipAddress)
+--				const std::string LookupIpByHostName(const char * hostname)
+--				const std::string LookupServiceByPort(const int port, const char * protocol)
+--				const string WinsockManager::LookupServiceByPort(const int port, const char * protocol)
 --
 -- DATE:		January 16, 2018
 --

@@ -22,21 +22,20 @@ public:
 private:
 	Ui::assign1Class ui;
 	IpLookupDialog* ipLookupDialog;
-	HostNameLookupDialog* hostnameLookupDialog;
+	HostNameLookupDialog* hostNameLookupDialog;
 	ServiceLookupDialog* serviceLookupDialog;
 	PortLookupDialog* portLookupDialog;
 	WinsockManager* winsockManager;
 
-	void initConnections();
-	void displayTextOnLabel(const QString text);
+	void displayText(const QString text);
 
 private slots:
 	void lookupIpPressed();
-	void lookupHostnamePressed();
+	void lookupHostNamePressed();
 	void lookupServicePressed();
 	void lookupPortPressed();
 
-	void hostnameReceived(const QString hostname);
+	void hostNameReceived(const QString hostname);
 	void ipReceived(const QString ipAddress);
 	void portReceived(const QString portNumber, const QString protocol);
 	void serviceReceived(const QString service, const QString protocol);
